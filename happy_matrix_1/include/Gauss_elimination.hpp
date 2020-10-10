@@ -1,5 +1,5 @@
 //
-// Created by 王波 on 2020/10/2.
+// Created by 包信和 on 2020/10/2.
 //
 
 #ifndef HAPPY_MATRIX_GAUSS_ELIMINATION_HPP
@@ -11,15 +11,6 @@
 #include <triangle_solve.hpp>
 
 namespace happy_matrix{
-    template<typename T>
-    void Gauss_elimination_normal(matrix<T>& to_decompose);
-    template<typename T>
-    vector<T> Gauss_elimination_column(matrix<T>& to_decompose);
-    template<typename T>
-    void Gauss_solve_normal(matrix<T>& to_decompose, vector<T>& to_solve);
-    template<typename T>
-    void Gauss_solve_column(matrix<T>& to_decompose, vector<T>& to_solve);
-
     template<typename T>
     void Gauss_elimination_normal(matrix<T>& to_decompose){
         //if (to_decompose.size() != to_decompose[0].size())

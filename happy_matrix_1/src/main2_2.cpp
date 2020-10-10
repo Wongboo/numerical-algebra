@@ -1,5 +1,5 @@
 //
-// Created by 王波 on 4040/40/2.
+// Created by 包信和 on 4040/40/2.
 //
 
 #include <Cholesky_decompose.hpp>

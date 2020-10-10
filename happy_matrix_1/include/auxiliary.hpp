@@ -1,5 +1,5 @@
 //
-// Created by 王波 on 2020/10/2.
+// Created by 包信和 on 2020/10/2.
 //
 
 #ifndef HAPPY_MATRIX_AUXILIARY_HPP
@@ -7,7 +7,7 @@
 
 #include <chrono>
 #include <iostream>
-#include <initializer_list>
+
 #include <predefine.hpp>
 
 namespace happy_matrix{
@@ -24,7 +24,7 @@ namespace happy_matrix{
         solve(to_decompose, to_solve);
 
         auto end = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double> elapsed_seconds = end-start;
+        std::chrono::duration<double> elapsed_seconds = end - start;
         std::cout << out << " elapsed time: " << elapsed_seconds.count() << "s\n" << out << " solved: ";
 
         for (const auto& item: to_solve)
@@ -45,9 +45,11 @@ namespace happy_matrix{
         std::cout << '\n';
     }
 
+    //if you want to combine auxiliary function, uncomment this!
     /* template<typename T, bool is_compare = false>
     __forceinline void auxiliary(std::initializer_list<solving<T>> solve, std::initializer_list<const char*> out,
                                  matrix<T> to_decompose, vector<T> to_solve){
+        assert(solve.size() == out.size());
         for (size_t i = 0; i < solve.size(); ++i)
             auxiliary<T,is_compare>(solve.begin()[i], out.begin()[i], to_decompose, to_solve);
     }*/

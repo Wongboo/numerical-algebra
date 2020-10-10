@@ -1,5 +1,5 @@
 //
-// Created by 王波 on 100100/10/2.
+// Created by 包信和 on 100100/10/2.
 //
 
 #include <random>
