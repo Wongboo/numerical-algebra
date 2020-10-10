@@ -1,0 +1,7 @@
+.*
+.idea/
+cmake*/
+*.zip
+*.docx
+*.pdf
+!.gitignore
