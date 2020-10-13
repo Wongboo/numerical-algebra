@@ -1,5 +1,5 @@
 //
-// Created by on 2020/10/13.
+// Created by 包信和 on 2020/10/13.
 //
 
 #include <auxiliary.hpp>
@@ -48,10 +48,8 @@ int main(){
 
     for (size_t i = 0; i < size; ++i){
         if (i != 0)
-            to_decompose[i][i - 1] = 1;
+            to_decompose[i][i - 1] = to_decompose[i - 1][i]= 1;
         to_decompose[i][i] = 10;
-        if (i != size - 1)
-            to_decompose[i][i + 1] = 1;
     }
 
     for (size_t i = 0; i < size; ++i) {
