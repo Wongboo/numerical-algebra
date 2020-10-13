@@ -60,7 +60,7 @@ int main(){
 #else
     using T = long double;
     constexpr size_t size = 40;
-    matrix<T> to_decompose(size, vector<long double>(size));
+    matrix<T> to_decompose(size, vector<T>(size));
     vector<T> to_solve(size);
 
     for (size_t i = 0; i < size; ++i)
