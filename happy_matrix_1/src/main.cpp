@@ -3,10 +3,10 @@
 //
 
 #include <auxiliary.hpp>
-#if MAJOR_NUM == 1 || MAJOR_NUM == 3
+#if MAJOR_NUM != 2
 #include <Gauss_elimination.hpp>
 #endif
-#if MAJOR_NUM == 2 || MAJOR_NUM == 3
+#if MAJOR_NUM > 1
 #include <Cholesky_decompose.hpp>
 #endif
 #if MINOR_NUM == 2
@@ -70,11 +70,11 @@ int main(){
         }
 #endif
 
-#if MAJOR_NUM == 1 || MAJOR_NUM == 3
+#if MAJOR_NUM != 2
     auxiliary(Gauss_solve_normal, to_decompose, to_solve);
     auxiliary(Gauss_solve_column, to_decompose, to_solve);
 #endif
-#if MAJOR_NUM == 2 || MAJOR_NUM == 3
+#if MAJOR_NUM > 1
     auxiliary(LLT_solve, to_decompose, to_solve);
     auxiliary(LDLT_solve, to_decompose, to_solve);
 #endif
