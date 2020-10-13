@@ -15,7 +15,7 @@ namespace happy_matrix{
     using solving = void(matrix<T>&, vector<T>&);
 
     template<typename T, bool is_compare = false>
-    __forceinline void auxiliary(solving<T> solve, const char* out, const matrix<T>& to_decompose_, const vector<T>& to_solve_){
+    __forceinline void auxiliary_impl(solving<T> solve, const char* out, const matrix<T>& to_decompose_, const vector<T>& to_solve_){
         auto to_decompose = to_decompose_;
         auto to_solve = to_solve_;
 
@@ -51,7 +51,7 @@ namespace happy_matrix{
                                  matrix<T> to_decompose, vector<T> to_solve){
         assert(solve.size() == out.size());
         for (size_t i = 0; i < solve.size(); ++i)
-            auxiliary<T,is_compare>(solve.begin()[i], out.begin()[i], to_decompose, to_solve);
+            auxiliary_impl<T,is_compare>(solve.begin()[i], out.begin()[i], to_decompose, to_solve);
     }*/
 }
 #endif //HAPPY_MATRIX_AUXILIARY_HPP
