@@ -1,8 +1,10 @@
 .*
 .idea/
 cmake*/
+*.7z
 *.zip
 *.docx
 *.pdf
+
 !.gitignore
 !.github/
