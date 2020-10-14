@@ -15,7 +15,7 @@ namespace happy_matrix{
     using solving = void(matrix<T>&, vector<T>&);
 
     template<typename T, bool is_compare = false>
-    __forceinline void auxiliary(solving<T> solve, const char* out, const matrix<T>& to_decompose_, const vector<T>& to_solve_){
+    __forceinline void auxiliary_impl(solving<T> solve, const char* out, const matrix<T>& to_decompose_, const vector<T>& to_solve_){
         auto to_decompose = to_decompose_;
         auto to_solve = to_solve_;
 
@@ -44,6 +44,9 @@ namespace happy_matrix{
         }
         std::cout << '\n';
     }
+
+#define auxiliary(a, b, c) auxiliary_impl(a, #a, b, c)
+#define auxiliary_comp(a, b, c) auxiliary_impl<T, true>(a, #a, b, c)
 
     //if you want to combine auxiliary function, uncomment this!
     /* template<typename T, bool is_compare = false>

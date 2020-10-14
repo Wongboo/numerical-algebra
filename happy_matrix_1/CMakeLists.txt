@@ -12,7 +12,10 @@ endif()
 include_directories("${CMAKE_SOURCE_DIR}/include")
 
 add_executable(happy_matrix_1 src/main1.cpp)
-add_executable(happy_matrix_2_1 src/main2_1.cpp)
-add_executable(happy_matrix_2_2 src/main2_2.cpp)
+add_executable(happy_matrix_2_1 src/main3_1.cpp)
+add_executable(happy_matrix_2_2 src/main3_2.cpp)
 add_executable(happy_matrix_3_1 src/main3_1.cpp)
 add_executable(happy_matrix_3_2 src/main3_2.cpp)
+
+target_compile_definitions(happy_matrix_3_1 PRIVATE USE_GAUSS)
+target_compile_definitions(happy_matrix_3_2 PRIVATE USE_GAUSS)
