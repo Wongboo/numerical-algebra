@@ -43,7 +43,7 @@ namespace happy_matrix{
     }
 
 #define auxiliary(a, b, c) auxiliary_impl(a, #a, b, c)
-#define auxiliary_comp(a, b, c) auxiliary_impl<T, true>(a, #a, b, c)
+#define auxiliary_comp(a, b, c) auxiliary_impl<decltype(c)::value_type, true>(a, #a, b, c)
 
     //if you want to combine auxiliary function, uncomment this!
     /* template<typename T, bool is_compare = false>
