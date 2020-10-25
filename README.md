@@ -7,7 +7,9 @@ Numerical algebra assignment, just for reference, do not copy blindly.
 ### main fallback
 - Does not guarantee exception-safe, I sacrifice it for size of executive. If you want to, add suitable exception such as *underflow error* to the code.
 -  In the auxiliary function, you have to manually rather than automatically type the name of function, wish someone can solve it in the issue. The possible solution is the macro *\_\_PRETTY_FUNCTION\_\_* / *\_\_func\_\_* or the previous experimental class *std::source_location*.Anyway, I solve it by using macro *#*, but it will create a function-like macro, which isn't limited in a namespace and is prone 
+## Happy_matrix_2
+### main feature
+- precisely calculate the infinity condition number of 5-20 order matrix
 ## License  
 The project is licensed under [GNU General Public License v3.0](LICENSE)
-## Sponsor
-Do not press *Sponsor* button, it is invalid!
+
