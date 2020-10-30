@@ -5,9 +5,9 @@
 #ifndef HAPPY_MATRIX_PREDEFINE_HPP
 #define HAPPY_MATRIX_PREDEFINE_HPP
 
+#include <cassert>
 #include <vector>
 #include <type_traits>
-
 
 #ifndef _WIN64
 #define __forceinline inline __attribute__((always_inline))

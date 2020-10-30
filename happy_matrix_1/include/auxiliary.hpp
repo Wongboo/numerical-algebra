@@ -42,8 +42,8 @@ namespace happy_matrix{
         std::cout << '\n' << '\n';
     }
 
-#define auxiliary(a, b, c) auxiliary_impl(a, #a, b, c)
-#define auxiliary_comp(a, b, c) auxiliary_impl<decltype(c)::value_type, true>(a, #a, b, c)
+#define auxiliary(a, b, c) ::happy_matrix::auxiliary_impl(a, #a, b, c)
+#define auxiliary_comp(a, b, c) ::happy_matrix::auxiliary_impl<decltype(c)::value_type, true>(a, #a, b, c)
 
     //if you want to combine auxiliary function, uncomment this!
     /* template<typename T, bool is_compare = false>

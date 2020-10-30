@@ -5,6 +5,10 @@ cmake*/
 *.zip
 *.docx
 *.pdf
+*.png
+*.md
+*.html
 
 !.gitignore
 !.github/
+!README.md
