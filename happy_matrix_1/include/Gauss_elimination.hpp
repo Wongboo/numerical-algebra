@@ -7,7 +7,6 @@
 
 #include <cmath>
 #include <algorithm>
-#include <iostream>
 #include <triangle_solve.hpp>
 
 namespace happy_matrix{

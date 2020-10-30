@@ -6,7 +6,6 @@
 #define HAPPY_MATRIX_CHOLESKY_DECOMPOSE_HPP
 
 #include <cmath>
-
 #include <triangle_solve.hpp>
 
 namespace happy_matrix{
