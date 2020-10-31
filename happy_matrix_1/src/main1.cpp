@@ -18,7 +18,7 @@ int main() {
 
     to_solve[0] = 7;
     to_solve[size - 1] = 14;
-    for (int i = 1; i < size - 1; ++i)
+    for (size_t i = 1; i < size - 1; ++i)
         to_solve[i] = 15;
     //matrix<long double> to_decompose(2, vector<long double>(2));
     //vector<long double> to_solve(2);

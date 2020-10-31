@@ -12,16 +12,16 @@ namespace happy_matrix{
     template<typename T>
     void LLT_decompose(matrix<T>& to_decompose){
         const auto size = to_decompose.size();
-        for (int i = 0; i < size; ++i) {
+        for (size_t i = 0; i < size; ++i) {
             to_decompose[i][i] = sqrt(to_decompose[i][i]);
-            for (int j = i + 1; j < size; ++j)
+            for (size_t j = i + 1; j < size; ++j)
                 to_decompose[j][i] /= to_decompose[i][i];
-            for (int j = i + 1; j < size; ++j)
-                for (int k = j; k < size; ++k)
+            for (size_t j = i + 1; j < size; ++j)
+                for (size_t k = j; k < size; ++k)
                     to_decompose[k][j] -= to_decompose[k][i] * to_decompose[j][i];
         }
-        for (int i = 1; i < size; ++i)
-            for (int j = 0; j < i; ++j)
+        for (size_t i = 1; i < size; ++i)
+            for (size_t j = 0; j < i; ++j)
                 to_decompose[j][i] = to_decompose[i][j];
     }
 
@@ -29,19 +29,19 @@ namespace happy_matrix{
     void LDLT_decompose(matrix<T>& to_decompose){
         const auto size = to_decompose.size();
         vector<T> v(size - 1);
-        for (int i = 0; i < size; ++i) {
-            for (int j = 0; j < i; ++j)
+        for (size_t i = 0; i < size; ++i) {
+            for (size_t j = 0; j < i; ++j)
                 v[j] = to_decompose[i][j] * to_decompose[j][j];
-            for (int j = 0; j < i; ++j)
+            for (size_t j = 0; j < i; ++j)
                 to_decompose[i][i] -= to_decompose[i][j] * v[j];
-            for (int j = i + 1; j < size; ++j){
-                for (int k = 0; k < i; ++k)
+            for (size_t j = i + 1; j < size; ++j){
+                for (size_t k = 0; k < i; ++k)
                     to_decompose[j][i] -= to_decompose[j][k] * v[k];
                 to_decompose[j][i] /= to_decompose[i][i];
                 }
         }
-        for (int i = 1; i < size; ++i)
-            for (int j = 0; j < i; ++j)
+        for (size_t i = 1; i < size; ++i)
+            for (size_t j = 0; j < i; ++j)
                 to_decompose[j][i] = to_decompose[i][j];
     }
 
