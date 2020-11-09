@@ -9,7 +9,7 @@
 #include <triangle_solve.hpp>
 
 namespace happy_matrix{
-    template<typename T>
+    template<typename T> requires real_float_number<T>
     void LLT_decompose(matrix<T>& to_decompose){
         const auto size = to_decompose.size();
         for (size_t i = 0; i < size; ++i) {

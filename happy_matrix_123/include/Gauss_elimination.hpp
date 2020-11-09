@@ -1,5 +1,5 @@
 //
-// Created by 包信和 on 2020/10/2.
+// Created by 王波 on 2020/10/2.
 //
 
 #ifndef HAPPY_MATRIX_GAUSS_ELIMINATION_HPP
@@ -7,9 +7,19 @@
 
 #include <cmath>
 #include <algorithm>
+#include <iostream>
 #include <triangle_solve.hpp>
 
 namespace happy_matrix{
+    template<typename T>
+    void Gauss_elimination_normal(matrix<T>& to_decompose);
+    template<typename T>
+    vector<size_t> Gauss_elimination_column(matrix<T>& to_decompose);
+    template<typename T>
+    void Gauss_solve_normal(matrix<T>& to_decompose, vector<T>& to_solve);
+    template<typename T>
+    void Gauss_solve_column(matrix<T>& to_decompose, vector<T>& to_solve);
+
     template<typename T>
     void Gauss_elimination_normal(matrix<T>& to_decompose){
         //if (to_decompose.size() != to_decompose[0].size())
@@ -27,12 +37,12 @@ namespace happy_matrix{
     }
 
     template<typename T>
-    vector<T> Gauss_elimination_column(matrix<T>& to_decompose){
+    vector<size_t> Gauss_elimination_column(matrix<T>& to_decompose){
         //if (to_decompose.size() != to_decompose[0].size())
             //throw std::invalid_argument("Size of matrix not fit!");
 
         const auto size = to_decompose.size();
-        vector<T> p(size - 1);
+        vector<size_t> p(size - 1);
         for (size_t i = 0; i < size - 1; ++i) {
             //don't manually throw error 1/0 will throw error
             T max = abs(to_decompose[i][i]);
@@ -71,6 +81,22 @@ namespace happy_matrix{
                 std::swap(to_solve[i], to_solve[p[i]]);
         triangle_solve_lower<T, true>(to_decompose, to_solve);
         triangle_solve_upper(to_decompose, to_solve);
+    }
+
+    template <typename T, bool is_transpose = false>
+    __forceinline void Gauss_solving_column(const vector<size_t>& p, const matrix<T>& to_decompose, vector<T>& to_solve){
+        if constexpr (!is_transpose) {
+            for (size_t i = 0; i < p.size(); ++i)
+                if (p[i] != i)
+                    std::swap(to_solve[i], to_solve[p[i]]);
+        }
+        triangle_solve_lower<T, !is_transpose>(to_decompose, to_solve);
+        triangle_solve_upper<T, is_transpose>(to_decompose, to_solve);
+        if constexpr (is_transpose) {
+            for (size_t i = p.size() - 1; i < p.size(); --i)
+                if (p[i] != i)
+                    std::swap(to_solve[i], to_solve[p[i]]);
+        }
     }
 }
 

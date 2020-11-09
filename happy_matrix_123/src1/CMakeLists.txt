@@ -1,0 +1,8 @@
+add_executable(happy_matrix_1_1 main1.cpp)
+add_executable(happy_matrix_1_2_1 main3_1.cpp)
+add_executable(happy_matrix_1_2_2 main3_2.cpp)
+add_executable(happy_matrix_1_3_1 main3_1.cpp)
+add_executable(happy_matrix_1_3_2 main3_2.cpp)
+
+target_compile_definitions(happy_matrix_1_3_1 PRIVATE USE_GAUSS)
+target_compile_definitions(happy_matrix_1_3_2 PRIVATE USE_GAUSS)

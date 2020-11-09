@@ -5,6 +5,7 @@
 #ifndef HAPPY_MATRIX_AUXILIARY_HPP
 #define HAPPY_MATRIX_AUXILIARY_HPP
 
+#include <cassert>
 #include <chrono>
 #include <iostream>
 
@@ -44,5 +45,14 @@ namespace happy_matrix{
 
 #define auxiliary(a, b, c) ::happy_matrix::auxiliary_impl(a, #a, b, c)
 #define auxiliary_comp(a, b, c) ::happy_matrix::auxiliary_impl<decltype(c)::value_type, true>(a, #a, b, c)
+
+    //if you want to combine auxiliary function, uncomment this!
+    /* template<typename T, bool is_compare = false>
+    __forceinline void auxiliary(std::initializer_list<solving<T>> solve, std::initializer_list<const char*> out,
+                                 matrix<T> to_decompose, vector<T> to_solve){
+        assert(solve.size() == out.size());
+        for (size_t i = 0; i < solve.size(); ++i)
+            auxiliary<T,is_compare>(solve.begin()[i], out.begin()[i], to_decompose, to_solve);
+    }*/
 }
 #endif //HAPPY_MATRIX_AUXILIARY_HPP

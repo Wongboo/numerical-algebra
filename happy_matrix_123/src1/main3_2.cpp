@@ -6,6 +6,9 @@
 #ifdef USE_GAUSS
 #include <Gauss_elimination.hpp>
 #endif
+#ifdef USE_QR
+#include <QR_elimination.hpp>
+#endif
 #include <auxiliary.hpp>
 
 using namespace happy_matrix;
@@ -28,5 +31,8 @@ int main(){
 #endif
     auxiliary(LLT_solve, to_decompose, to_solve);
     auxiliary(LDLT_solve, to_decompose, to_solve);
+#ifdef USE_QR
+    auxiliary(QR_solve, to_decompose, to_solve);
+#endif
     return 0;
 }
