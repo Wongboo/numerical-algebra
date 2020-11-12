@@ -6,6 +6,7 @@
 #define HAPPY_MATRIX_PREDEFINE_HPP
 
 #include <vector>
+#include <omp.h>
 
 #ifndef _WIN32
 #define __forceinline inline __attribute__((always_inline))
@@ -36,9 +37,17 @@ namespace happy_matrix {
     template<typename T>
     vector<T> operator*(const matrix<T> &left, const vector<T> &right) {
         vector<T> out(left.size());
-        for (size_t i = 0; i < left.size(); i++)
+#pragma omp parallel for shared(left, right, out)\
+    default(none) num_threads(omp_get_num_procs() / 2)
+        for (size_t i = 0; i < left.size(); i++){
+            T s(0);
+#pragma GCC ivdep
+#pragma clang loop vectorize(enable)
+#pragma loop(ivdep)
             for (size_t j = 0; j < right.size(); j++)
-                out[i] += left[i][j] * right[j];
+                s += left[i][j] * right[j];
+            out[i] = s;
+        }
         return out;
     }
 

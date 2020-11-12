@@ -10,9 +10,12 @@ else()
 endif()
 
 include_directories("${CMAKE_SOURCE_DIR}/include")
+find_package(OpenMP REQUIRED)
+link_libraries(OpenMP::OpenMP_CXX)
 
 add_subdirectory(src1)
 add_subdirectory(src2)
 #add_subdirectory(src3)
+add_executable(test test.cpp)
 
 
