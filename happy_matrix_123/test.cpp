@@ -14,7 +14,7 @@ template<typename T>
 vector<T> operator+(const matrix<T> &left, const vector<T> &right) {
     vector<T> out(left.size());
     constexpr size_t size = sizeof(T) == 4 ? 4 : sizeof(T) == 8 ? 2 : 1;
-#pragma omp parallel for shared(left, right, out)\
+//#pragma omp parallel for shared(left, right, out)\
     default(none) num_threads(omp_get_num_procs() / 2)
     for (int i = 0; i < left.size(); i++){
         T s(0);

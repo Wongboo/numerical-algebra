@@ -39,7 +39,7 @@ namespace happy_matrix {
     vector<T> operator*(const matrix<T> &left, const vector<T> &right) {
         vector<T> out(left.size());
 #ifdef __clang__
-#pragma omp parallel for shared(left, right, out) default(none) num_threads(omp_get_num_procs() / 2)
+//#pragma omp parallel for shared(left, right, out) default(none) num_threads(omp_get_num_procs() / 2)
         for (int i = 0; i < left.size(); i++){
             T s(0);
 #pragma clang loop vectorize(enable)
@@ -47,7 +47,7 @@ namespace happy_matrix {
                 s += left[i][j] * right[j];
             out[i] = s;
 #else
-#pragma omp parallel for shared(left, right, out, std::execution::unseq) default(none) num_threads(omp_get_num_procs() / 2)
+//#pragma omp parallel for shared(left, right, out, std::execution::unseq) default(none) num_threads(omp_get_num_procs() / 2)
         for (int i = 0; i < left.size(); i++){
             out[i] = std::transform_reduce(std::execution::unseq, right.begin(),
                                            right.end(), left[i].begin(), T(0));
