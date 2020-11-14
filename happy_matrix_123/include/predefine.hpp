@@ -6,6 +6,7 @@
 #define HAPPY_MATRIX_PREDEFINE_HPP
 
 #include <vector>
+#include <execution>
 #include <omp.h>
 
 #ifndef _WIN32
@@ -37,16 +38,20 @@ namespace happy_matrix {
     template<typename T>
     vector<T> operator*(const matrix<T> &left, const vector<T> &right) {
         vector<T> out(left.size());
-#pragma omp parallel for shared(left, right, out)\
-    default(none) num_threads(omp_get_num_procs() / 2)
-        for (size_t i = 0; i < left.size(); i++){
+#ifdef __clang__
+#pragma omp parallel for shared(left, right, out) default(none) num_threads(omp_get_num_procs() / 2)
+        for (int i = 0; i < left.size(); i++){
             T s(0);
-#pragma GCC ivdep
 #pragma clang loop vectorize(enable)
-#pragma loop(ivdep)
             for (size_t j = 0; j < right.size(); j++)
                 s += left[i][j] * right[j];
             out[i] = s;
+#else
+#pragma omp parallel for shared(left, right, out, std::execution::unseq) default(none) num_threads(omp_get_num_procs() / 2)
+        for (int i = 0; i < left.size(); i++){
+            out[i] = std::transform_reduce(std::execution::unseq, right.begin(),
+                                           right.end(), left[i].begin(), T(0));
+#endif
         }
         return out;
     }

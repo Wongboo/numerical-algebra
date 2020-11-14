@@ -3,25 +3,34 @@
 //
 
 #include <predefine.hpp>
+#include <iostream>
 #include <random>
 #include <chrono>
 
 using namespace happy_matrix;
 using namespace std;
 
-
-
 template<typename T>
 vector<T> operator+(const matrix<T> &left, const vector<T> &right) {
     vector<T> out(left.size());
-//#pragma omp parallel for shared(left, right, out) default(none)
-    for (size_t i = 0; i < left.size(); i++)
-#pragma GCC ivdep
-//#pragma clang loop vectorize(enable)
+    constexpr size_t size = sizeof(T) == 4 ? 4 : sizeof(T) == 8 ? 2 : 1;
+#pragma omp parallel for shared(left, right, out)\
+    default(none) num_threads(omp_get_num_procs() / 2)
+    for (int i = 0; i < left.size(); i++){
+        T s(0);
+#pragma clang loop vectorize(enable)
 #pragma loop( ivdep )
-            for (size_t j = 0; j < right.size(); j++)
-                out[i] += left[i][j] * right[j];
+#pragma GCC ivdep
+        for (size_t j = 0; j < right.size(); j++)
+            s += left[i][j] * right[j];
+        out[i] = s;
+    }
     return out;
+}
+
+auto multiply(vector<float> a, vector<float> b){
+    auto s = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
+    return s;
 }
 
 int main(){
@@ -45,6 +54,10 @@ int main(){
         to_solve[i] = dis(gen);
     }
 
+    //vector<float> a {1.f, 2.f, 3.f, 4.f};
+    //vector<float> b { 3.f, 1.f, 2.f,4.f};
+    //b[0] = dis(gen);
+    //cout << multiply(a, b);
     auto start = chrono::high_resolution_clock::now();
     auto solved = to_decompose + to_solve;
     auto end = chrono::high_resolution_clock::now();
